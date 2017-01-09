@@ -29,6 +29,8 @@ public class teleop extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	//this should give us the command-based mecanum drive we were looking for
+    	Robot.rd.mecanumDrive_Cartesian(OI.rightS.getX(), OI.rightS.getY(), OI.rightS.getTwist(),0);
     	
     }
 
