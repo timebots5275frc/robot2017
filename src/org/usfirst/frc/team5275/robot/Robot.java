@@ -1,7 +1,7 @@
 
 package org.usfirst.frc.team5275.robot;
 
-import org.usfirst.frc.team5275.robot.commands.ExampleCommand;
+import org.usfirst.frc.team5275.robot.commands.*;
 import org.usfirst.frc.team5275.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team5275.robot.subsystems.ExampleSubsystem;
 
@@ -41,7 +41,7 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
         chooser = new SendableChooser();
         chooser.addDefault("Default Auto", new ExampleCommand());
-//        chooser.addObject("My Auto", new MyAutoCommand());
+        chooser.addObject("teleop", new teleop());
         SmartDashboard.putData("Auto mode", chooser);
         
     }
@@ -106,7 +106,7 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
-        
+        	
     }
     
     /**
