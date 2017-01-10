@@ -26,7 +26,7 @@ public class Robot extends IterativeRobot {
 	public static OI oi;
 
     Command autonomousCommand;
-    public Command teleopCommand;
+    public Command teleopCommand = new teleop();
     SendableChooser chooser;
     public static DriveTrain drive = new DriveTrain();
     public static RobotDrive rd = new RobotDrive(1,2,3,4);
