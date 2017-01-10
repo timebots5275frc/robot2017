@@ -5,6 +5,8 @@ import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
+ *this subsystem file is likely not needed right now, because we've essentially bypassed
+ *with the rd object in the robot file
  *
  */
 public class DriveTrain extends Subsystem {
