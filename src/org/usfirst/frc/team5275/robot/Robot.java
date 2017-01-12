@@ -20,6 +20,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * creating this project, you must also update the manifest file in the resource
  * directory.
  */
+
+//on eclipse linux this line will throw an error, however, the project seems to build just fine.
+// it's safe to ignore this error, as eclipse for linux seems to handle a few things differently
+//than the windows version does.
 public class Robot extends IterativeRobot {
 
 	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
