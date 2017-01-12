@@ -24,6 +24,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 //on eclipse linux this line will throw an error, however, the project seems to build just fine.
 // it's safe to ignore this error, as eclipse for linux seems to handle a few things differently
 //than the windows version does.
+
+//it's weird that we're doing command based but Robot extends Iterative - should we fix that?
 public class Robot extends IterativeRobot {
 
 	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
