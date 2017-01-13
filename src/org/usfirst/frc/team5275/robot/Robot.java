@@ -48,9 +48,7 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
 		oi = new OI();
 		CameraServer server = CameraServer.getInstance();
-		/*server.setQuality(50);
-		server.startAutomaticCapture("cam0");
-        */
+		server.startAutomaticCapture(0);
         chooser = new SendableChooser();
         chooser.addDefault("Default Auto", new ExampleCommand());
         chooser.addObject("teleop", new teleop());
