@@ -36,6 +36,7 @@ public class Robot extends IterativeRobot {
     Command autonomousCommand;
     public Command teleopCommand = new teleop();
     public Command collectorCommand = new Collector();
+    public Command servoCommand = new Servo();
     SendableChooser chooser;
     public static DriveTrain drive = new DriveTrain();
     public static RobotDrive rd = new RobotDrive(1,2,3,4);
@@ -54,6 +55,7 @@ public class Robot extends IterativeRobot {
         chooser.addDefault("Default Auto", new ExampleCommand());
         chooser.addObject("teleop", new teleop());
         SmartDashboard.putData("Auto mode", chooser);
+        
         
     }
 	
@@ -110,6 +112,7 @@ public class Robot extends IterativeRobot {
         // continue until interrupted by another command, remove
         // this line or comment it out.
         if (autonomousCommand != null) autonomousCommand.cancel();
+        System.out.println("robot started");
     }
 
     /**
@@ -119,6 +122,7 @@ public class Robot extends IterativeRobot {
         Scheduler.getInstance().run();
         teleopCommand.start();
         collectorCommand.start();
+        servoCommand.start();
         	
     }
     

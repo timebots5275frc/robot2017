@@ -1,17 +1,16 @@
 
 package org.usfirst.frc.team5275.robot.commands;
 
-import org.usfirst.frc.team5275.robot.OI;
-import org.usfirst.frc.team5275.robot.Robot;
-
 import edu.wpi.first.wpilibj.command.Command;
+
+import org.usfirst.frc.team5275.robot.*;
 
 /**
  *
  */
-public class Collector extends Command {
-	Boolean i = false;
-    public Collector() {
+public class Servo extends Command {
+
+    public Servo() {
         // Use requires() here to declare subsystem dependencies
         requires(Robot.drive);
     }
@@ -22,20 +21,7 @@ public class Collector extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	/*
-    	 * a brief description of what's happening here:
-    	 * if 'i' is true, turn on the Collector Talon.
-    	 * then, if I is pressed, invert the value of the boolean.
-    	 * this gives the effect of a toggle switch, such that it will only
-    	 * continue going as long as the button is not pressed.
-    	 */
-    	if (i){
-    		Robot.drive.Collector.set(1.0);
-    	}
-        if (OI.triggerL.get()){
-        	i = !i; // 'flipping' the value of the boolean. This gives us the effect of a toggle switch
-        }
-    	
+    	Robot.drive.camServo.set(OI.rightS.getRawAxis(3));
     }
 
     // Make this return true when this Command no longer needs to run execute()
