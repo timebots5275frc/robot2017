@@ -14,6 +14,7 @@ public class DriveTrain extends Subsystem {
     public Talon RF;
     public Talon LB;
     public Talon RB;
+    public Talon Collector = new Talon(5);
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
     public void initDefaultCommand() {
