@@ -22,8 +22,8 @@ public class Collector extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	i = ((0 - OI.rightS.getRawAxis(3)) +  1) * 0.5;
-        Robot.drive.Collect.set(i);
+    	i = ((0 - OI.leftS.getRawAxis(2)) +  1) * 0.5; // this is some stuff that we have to do to ensure that our collection motor doesn't go backwards.
+        Robot.drive.Collector.set(i); // drive the collector with the 4th axis
     	
     }
 

@@ -2,7 +2,7 @@
 package org.usfirst.frc.team5275.robot;
 
 import org.usfirst.frc.team5275.robot.commands.ExampleCommand;
-import org.usfirst.frc.team5275.robot.commands.teleop;
+import org.usfirst.frc.team5275.robot.commands.*;
 import org.usfirst.frc.team5275.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team5275.robot.subsystems.ExampleSubsystem;
 
@@ -35,6 +35,7 @@ public class Robot extends IterativeRobot {
 
     Command autonomousCommand;
     public Command teleopCommand = new teleop();
+    public Command collectorCommand = new Collector();
     SendableChooser chooser;
     public static DriveTrain drive = new DriveTrain();
     public static RobotDrive rd = new RobotDrive(1,2,3,4);
@@ -117,6 +118,7 @@ public class Robot extends IterativeRobot {
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
         teleopCommand.start();
+        collectorCommand.start();
         	
     }
     
