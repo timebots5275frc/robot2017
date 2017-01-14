@@ -22,7 +22,7 @@ public class Collector extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	i = OI.rightS.getRawAxis(3) +  1;
+    	i = ((0 - OI.rightS.getRawAxis(3)) +  1) * 0.5;
         Robot.drive.Collect.set(i);
     	
     }
