@@ -1,10 +1,12 @@
 
 package org.usfirst.frc.team5275.robot;
 
-import org.usfirst.frc.team5275.robot.commands.*;
+import org.usfirst.frc.team5275.robot.commands.ExampleCommand;
+import org.usfirst.frc.team5275.robot.commands.teleop;
 import org.usfirst.frc.team5275.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team5275.robot.subsystems.ExampleSubsystem;
 
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.Command;
@@ -39,6 +41,10 @@ public class Robot extends IterativeRobot {
      */
     public void robotInit() {
 		oi = new OI();
+		CameraServer server = CameraServer.getInstance();
+		/*server.setQuality(50);
+		server.startAutomaticCapture("cam0");
+        */
         chooser = new SendableChooser();
         chooser.addDefault("Default Auto", new ExampleCommand());
         chooser.addObject("teleop", new teleop());
@@ -106,6 +112,7 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
+        teleopCommand.start();
         	
     }
     
