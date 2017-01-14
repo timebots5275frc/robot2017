@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class Collector extends Command {
-
+	double i;
     public Collector() {
         // Use requires() here to declare subsystem dependencies
         requires(Robot.drive);
@@ -22,8 +22,8 @@ public class Collector extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	 // 
-        drive.Collect.set(OI.rightS.getRawAxis(3));
+    	i = OI.rightS.getRawAxis(3) +  1;
+        Robot.drive.Collect.set(i);
     	
     }
 
