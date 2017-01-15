@@ -25,12 +25,15 @@ public class Collector extends Command {
     	/*
     	 * a brief description of what's happening here:
     	 * if 'i' is true, turn on the Collector Talon.
-    	 * then, if I is pressed, invert the value of the boolean.
+    	 * then, if the left stick trigger is pressed, invert the value of the boolean.
     	 * this gives the effect of a toggle switch, such that it will only
     	 * continue going as long as the button is not pressed.
     	 */
     	if (i){
     		Robot.drive.Collector.set(1.0);
+    	}
+    	else if (!i){
+    		Robot.drive.Collector.set(0.0);
     	}
         if (OI.triggerL.get()){
         	i = !i; // 'flipping' the value of the boolean. This gives us the effect of a toggle switch
