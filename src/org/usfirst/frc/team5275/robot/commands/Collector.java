@@ -30,13 +30,20 @@ public class Collector extends Command {
     	 * continue going as long as the button is not pressed.
     	 */
     	if (i){
-    		Robot.drive.Collector.set(1.0);
+    			Robot.drive.Collector.set(0.5);
     	}
-    	else if (!i){
-    		Robot.drive.Collector.set(0.0);
+    	else {
+    	Robot.drive.Collector.set(0.0);
     	}
         if (OI.triggerL.get()){
-        	i = !i; // 'flipping' the value of the boolean. This gives us the effect of a toggle switch
+       i = !i; // 'flipping' the value of the boolean. This gives us the effect of a toggle switch
+    
+            System.out.println(i);
+            
+            
+        
+            
+            
         }
     	
     }

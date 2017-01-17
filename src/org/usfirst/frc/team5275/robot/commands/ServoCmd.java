@@ -8,9 +8,9 @@ import org.usfirst.frc.team5275.robot.*;
 /**
  *
  */
-public class Servo extends Command {
+public class ServoCmd extends Command {
 
-    public Servo() {
+    public ServoCmd() {
         // Use requires() here to declare subsystem dependencies
         requires(Robot.drive);
     }

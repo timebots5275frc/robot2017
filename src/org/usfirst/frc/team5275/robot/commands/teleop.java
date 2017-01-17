@@ -23,8 +23,8 @@ public class teleop extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	OI.leftS.getRawAxis(1);
-    	OI.rightS.getRawAxis(1);
+    	//OI.leftS.getRawAxis(1);
+    	//OI.rightS.getRawAxis(1);
     }
 
     // Called repeatedly when this Command is scheduled to run

@@ -1,8 +1,9 @@
 
 package org.usfirst.frc.team5275.robot;
 
-import org.usfirst.frc.team5275.robot.commands.ExampleCommand;
-import org.usfirst.frc.team5275.robot.commands.*;
+import org.usfirst.frc.team5275.robot.commands.Collector;
+import org.usfirst.frc.team5275.robot.commands.ServoCmd;
+import org.usfirst.frc.team5275.robot.commands.teleop;
 import org.usfirst.frc.team5275.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team5275.robot.subsystems.ExampleSubsystem;
 
@@ -13,7 +14,6 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -36,7 +36,7 @@ public class Robot extends IterativeRobot {
     Command autonomousCommand;
     public Command teleopCommand = new teleop();
     public Command collectorCommand = new Collector();
-    public Command servoCommand = new Servo();
+    public Command servoCommand = new ServoCmd();
     SendableChooser chooser;
     public static DriveTrain drive = new DriveTrain();
     public static RobotDrive rd = new RobotDrive(1,2,3,4);
@@ -51,11 +51,7 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
 		CameraServer server = CameraServer.getInstance();
 		server.startAutomaticCapture(0);
-        chooser = new SendableChooser();
-        chooser.addDefault("Default Auto", new ExampleCommand());
-        chooser.addObject("teleop", new teleop());
-        SmartDashboard.putData("Auto mode", chooser);
-        
+
         
     }
 	
@@ -121,9 +117,9 @@ public class Robot extends IterativeRobot {
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
         teleopCommand.start();
-        collectorCommand.start();
+       // collectorCommand.start();
         servoCommand.start();
-        	
+        OI.triggerL.whenActive(collectorCommand);
     }
     
     /**
