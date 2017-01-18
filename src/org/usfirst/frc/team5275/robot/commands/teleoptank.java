@@ -12,9 +12,9 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class teleop extends Command {
+public class teleoptank extends Command {
 
-    public teleop() {
+    public teleoptank() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.drive);

@@ -4,6 +4,7 @@ package org.usfirst.frc.team5275.robot;
 import org.usfirst.frc.team5275.robot.commands.Collector;
 import org.usfirst.frc.team5275.robot.commands.ServoCmd;
 import org.usfirst.frc.team5275.robot.commands.teleop;
+import org.usfirst.frc.team5275.robot.commands.teleoptank;
 import org.usfirst.frc.team5275.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team5275.robot.subsystems.ExampleSubsystem;
 
@@ -40,6 +41,7 @@ public class Robot extends IterativeRobot {
     SendableChooser chooser;
     public static DriveTrain drive = new DriveTrain();
     public static RobotDrive rd = new RobotDrive(1,2,3,4);
+    public Command tankCommand = new teleoptank();
     
     
 
