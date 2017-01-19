@@ -38,7 +38,7 @@ public class Collector extends Command {
         if (OI.triggerL.get()){
        i = !i; // 'flipping' the value of the boolean. This gives us the effect of a toggle switch
     
-            System.out.println(i);
+            //System.out.println(i);
             
             
         
