@@ -44,6 +44,7 @@ public class Robot extends IterativeRobot {
     public Command tankCommand = new teleoptank();
     
     
+    
 
     /**
      * This function is run when the robot is first started up and should be
@@ -53,7 +54,8 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
 		CameraServer server = CameraServer.getInstance();
 		server.startAutomaticCapture(0);
-
+		chooser.addDefault("Mecanum Drive", teleopCommand);
+		chooser.addObject("Tank Drive", tankCommand);
         
     }
 	
@@ -118,8 +120,8 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
-        teleopCommand.start();
-       // collectorCommand.start();
+        chooser.getSelected().start();
+        collectorCommand.start();
         servoCommand.start();
         OI.triggerL.whenActive(collectorCommand);
     }
