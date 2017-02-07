@@ -1,36 +1,34 @@
-/*
- * 
- */
 
 package org.usfirst.frc.team5275.robot.commands;
 
 import org.usfirst.frc.team5275.robot.OI;
 import org.usfirst.frc.team5275.robot.Robot;
-import org.usfirst.frc.team5275.robot.subsystems.*;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class teleop extends Command {
-
-    public teleop() {
+public class ConveyorReverse extends Command {
+    public ConveyorReverse() {
         // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
-    	requires(Robot.drive);
+        requires(Robot.drive);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	//OI.leftS.getRawAxis(1);
-    	//OI.rightS.getRawAxis(1);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	//Robot.SRXrd.mecanumDrive_Cartesian(OI.rightS.getX(), OI.rightS.getY(), OI.rightS.getTwist(),0);
-    	Robot.rd.mecanumDrive_Cartesian(.5*OI.rightS.getX(), .5*OI.rightS.getY(), .5*OI.rightS.getZ(),0);
-    	
+    	/*
+    	 * a brief description of what's happening here:
+    	 * if 'i' is true, turn on the Collector Talon.
+    	 * then, if the left stick middle button is pressed, invert the value of the boolean.
+    	 * this gives the effect of a toggle switch, such that it will only
+    	 * continue going as long as the button is not pressed.
+    	 */
+    	Robot.drive.Conveyor.set(-0.5);
     	
     }
 

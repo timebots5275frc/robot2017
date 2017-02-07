@@ -2,20 +2,25 @@
 package org.usfirst.frc.team5275.robot;
 
 import org.usfirst.frc.team5275.robot.commands.Collector;
+import org.usfirst.frc.team5275.robot.commands.Conveyor;
+import org.usfirst.frc.team5275.robot.commands.CollectorReverse;
+import org.usfirst.frc.team5275.robot.commands.ConveyorReverse;
+import org.usfirst.frc.team5275.robot.OI;
 import org.usfirst.frc.team5275.robot.commands.ServoCmd;
 import org.usfirst.frc.team5275.robot.commands.teleop;
 import org.usfirst.frc.team5275.robot.commands.teleoptank;
 import org.usfirst.frc.team5275.robot.subsystems.DriveTrain;
-import org.usfirst.frc.team5275.robot.subsystems.ExampleSubsystem;
-
+import com.ctre.CANTalon;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-
+/**
+ * import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+ * import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+ */
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the IterativeRobot
@@ -28,20 +33,23 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 // it's safe to ignore this error, as eclipse for linux seems to handle a few things differently
 //than the windows version does.
 
-//it's weird that we're doing command based but Robot extends Iterative - should we fix that?
 public class Robot extends IterativeRobot {
 
-	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static OI oi;
 
     Command autonomousCommand;
-    public Command teleopCommand = new teleop();
+    public Command conveyorUnjammer = new ConveyorReverse();
+    public Command collectorUnjammer = new CollectorReverse();
+    public Command conveyorCommand = new Conveyor();
+    public Command teleopMecanumCommand = new teleop();
     public Command collectorCommand = new Collector();
     public Command servoCommand = new ServoCmd();
-    SendableChooser chooser;
-    public static DriveTrain drive = new DriveTrain();
+    //SendableChooser<Boolean> chooser;
+    public static DriveTrain drive = new DriveTrain(); // no idea what this does but it's probably better to leave it in to appease the java gods.
+    //public static RobotDrive SRXrd = new RobotDrive(DriveTrain.SRX1, DriveTrain.SRX2, DriveTrain.SRX3, DriveTrain.SRX4);
     public static RobotDrive rd = new RobotDrive(1,2,3,4);
     public Command tankCommand = new teleoptank();
+    public Command selectedCommand;
     
     
     
@@ -52,11 +60,9 @@ public class Robot extends IterativeRobot {
      */
     public void robotInit() {
 		oi = new OI();
-		CameraServer server = CameraServer.getInstance();
-		server.startAutomaticCapture(0);
-		chooser.addDefault("Mecanum Drive", teleopCommand);
-		chooser.addObject("Tank Drive", tankCommand);
-        
+		CameraServer cServer = CameraServer.getInstance();
+		cServer.startAutomaticCapture(0);
+		
     }
 	
 	/**
@@ -82,7 +88,7 @@ public class Robot extends IterativeRobot {
 	 * or additional comparisons to the switch structure below with additional strings & commands.
 	 */
     public void autonomousInit() {
-        autonomousCommand = (Command) chooser.getSelected();
+        //autonomousCommand = (Command) chooser.getSelected();
         
 		/* String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
 		switch(autoSelected) {
@@ -112,7 +118,6 @@ public class Robot extends IterativeRobot {
         // continue until interrupted by another command, remove
         // this line or comment it out.
         if (autonomousCommand != null) autonomousCommand.cancel();
-        System.out.println("robot started");
     }
 
     /**
@@ -120,12 +125,14 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
-        chooser.getSelected().start();
-        collectorCommand.start();
+        
+        //conveyorCommand.start();
+        OI.LeftRightButton.whenPressed(conveyorUnjammer);
         servoCommand.start();
         OI.triggerL.whenActive(collectorCommand);
+        OI.LeftMiddleButton.whenActive(conveyorCommand);
+        OI.LeftLeftButton.whenPressed(collectorUnjammer);
     }
-    
     /**
      * This function is called periodically during test mode
      */

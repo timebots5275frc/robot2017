@@ -39,5 +39,8 @@ public class OI {
 	public static Joystick rightS = new Joystick(1);
     public static JoystickButton triggerL = new JoystickButton(leftS, 1);
     public JoystickButton triggerR = new JoystickButton(rightS, 1);
+    public static JoystickButton LeftMiddleButton = new JoystickButton(leftS, 2);
+    public static JoystickButton LeftRightButton = new JoystickButton(leftS, 4);
+    public static JoystickButton LeftLeftButton = new JoystickButton(leftS, 3);
 }
 

@@ -2,7 +2,7 @@
 package org.usfirst.frc.team5275.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-
+import org.usfirst.frc.team5275.robot.subsystems.*;
 import org.usfirst.frc.team5275.robot.*;
 
 /**
@@ -21,7 +21,7 @@ public class ServoCmd extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.drive.camServo.set(OI.rightS.getRawAxis(3));
+    	DriveTrain.camServo.set(OI.rightS.getRawAxis(3));
     }
 
     // Make this return true when this Command no longer needs to run execute()
