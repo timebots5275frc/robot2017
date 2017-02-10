@@ -1,48 +1,35 @@
-/*
- * 
- */
 
 package org.usfirst.frc.team5275.robot.commands;
 
 import org.usfirst.frc.team5275.robot.OI;
 import org.usfirst.frc.team5275.robot.Robot;
-import org.usfirst.frc.team5275.robot.subsystems.*;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class teleop extends Command {
-
-    public teleop() {
+public class CollectorReverse extends Command {
+    public CollectorReverse() {
         // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
-    	requires(Robot.drive);
+        requires(Robot.drive);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-<<<<<<< HEAD
-    	Robot.oi.leftS.getRawAxis(1);
-    	Robot.oi.rightS.getRawAxis(1);
-=======
-    	//OI.leftS.getRawAxis(1);
-    	//OI.rightS.getRawAxis(1);
->>>>>>> master
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-<<<<<<< HEAD
-    	//this should give us the command-based mecanum drive we were looking for
-//    	Robot.PWMDrive.mecanumDrive_Cartesian(Robot.oi.rightS.getX(), Robot.oi.rightS.getY(), Robot.oi.rightS.getTwist(),0);
-   // 	triggerR.whenPressed(new reverse);
-=======
-    	//Robot.SRXrd.mecanumDrive_Cartesian(OI.rightS.getX(), OI.rightS.getY(), OI.rightS.getTwist(),0);
-    	Robot.rd.mecanumDrive_Cartesian(.5*OI.rightS.getX(), .5*OI.rightS.getY(), .5*OI.rightS.getZ(),0);
+    	/*
+    	 * a brief description of what's happening here:
+    	 * if 'i' is true, turn on the Collector Talon.
+    	 * then, if the left stick middle button is pressed, invert the value of the boolean.
+    	 * this gives the effect of a toggle switch, such that it will only
+    	 * continue going as long as the button is not pressed.
+    	 */
+    	Robot.drive.Collector.set(-0.5);
     	
-    	
->>>>>>> master
     }
 
     // Make this return true when this Command no longer needs to run execute()
