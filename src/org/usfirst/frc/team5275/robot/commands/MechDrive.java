@@ -1,37 +1,31 @@
-/*
- * a command to tank-drive/skid-steer a robot
- * 
- */
 
 package org.usfirst.frc.team5275.robot.commands;
 
-import org.usfirst.frc.team5275.robot.OI;
-import org.usfirst.frc.team5275.robot.Robot;
-
 import edu.wpi.first.wpilibj.command.Command;
+
+import org.usfirst.frc.team5275.robot.Robot;
 
 /**
  *
  */
-public class teleop extends Command {
 
-    public teleop() {
+public class MechDrive extends Command {
+
+    public MechDrive() {
         // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
-    	requires(Robot.drive);
+        requires(Robot.drive);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.oi.leftS.getRawAxis(1);
-    	Robot.oi.rightS.getRawAxis(1);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	//this should give us the command-based mecanum drive we were looking for
-//    	Robot.PWMDrive.mecanumDrive_Cartesian(Robot.oi.rightS.getX(), Robot.oi.rightS.getY(), Robot.oi.rightS.getTwist(),0);
-   // 	triggerR.whenPressed(new reverse);
+    	double x = 0.5*Robot.oi.leftS.getX();
+    	double y = 0.5*Robot.oi.leftS.getY();
+    	double z = 0.5*Robot.oi.leftS.getZ();
+    	Robot.CANDrive.mecanumDrive_Cartesian(x, y, z, 0);
     }
 
     // Make this return true when this Command no longer needs to run execute()

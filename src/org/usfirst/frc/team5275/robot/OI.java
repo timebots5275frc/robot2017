@@ -35,9 +35,15 @@ public class OI {
     // Start the command when the button is released  and let it run the command
     // until it is finished as determined by it's isFinished method.
     // button.whenReleased(new ExampleCommand());
-	public static Joystick leftS = new Joystick(0);
-	public static Joystick rightS = new Joystick(1);
-    public static JoystickButton triggerL = new JoystickButton(leftS, 1);
-    public JoystickButton triggerR = new JoystickButton(rightS, 1);
+	public Joystick leftS = new Joystick(0);
+	public Joystick rightS = new Joystick(1);
+    public JoystickButton triggerL = new JoystickButton(leftS, 1);
+   // public static JoystickButton triggerR = new JoystickButton(rightS, 1);
+    public JoystickButton BR1 = new JoystickButton(rightS, 1);
+    public JoystickButton BR2 = new JoystickButton(rightS, 2);
+    public JoystickButton BR7 = new JoystickButton(rightS, 7);
+    public JoystickButton BR8 = new JoystickButton(rightS, 8);
+    public JoystickButton BR11 = new JoystickButton(rightS, 11);
+    public JoystickButton BR12 = new JoystickButton(rightS, 12);
 }
 

@@ -1,10 +1,5 @@
-/*
- * a command to tank-drive/skid-steer a robot
- * 
- */
-
 package org.usfirst.frc.team5275.robot.commands;
-
+/*
 import org.usfirst.frc.team5275.robot.OI;
 import org.usfirst.frc.team5275.robot.Robot;
 
@@ -13,9 +8,10 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class teleop extends Command {
-
-    public teleop() {
+/*
+public class QSwitch extends Command {
+	Boolean i = false;
+    public QSwitch() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.drive);
@@ -23,16 +19,29 @@ public class teleop extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.oi.leftS.getRawAxis(1);
-    	Robot.oi.rightS.getRawAxis(1);
+    	
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	//this should give us the command-based mecanum drive we were looking for
-//    	Robot.PWMDrive.mecanumDrive_Cartesian(Robot.oi.rightS.getX(), Robot.oi.rightS.getY(), Robot.oi.rightS.getTwist(),0);
-   // 	triggerR.whenPressed(new reverse);
+    	
+    	if (i){
+			Robot.drive.Con.set(0.5);
+	}
+	else {
+	Robot.drive.Con.set(0.0);
+	}
+ //   if (Robot.oi.triggerR.get()){
+   i = !i; // 'flipping' the value of the boolean. This gives us the effect of a toggle switch
     }
+  //      System.out.println("die");
+        
+        
+    
+        
+        
+    
+    	}
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
@@ -48,3 +57,4 @@ public class teleop extends Command {
     protected void interrupted() {
     }
 }
+*/
