@@ -2,18 +2,17 @@ package org.usfirst.frc.team5275.robot.commands;
 
 import org.usfirst.frc.team5275.robot.*;
 
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class FWAuto extends Command {
+public class Stop extends Command {
 
-	Command Stop = new Stop();
 	
 	
-    public FWAuto() {
+	
+    public Stop() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.drive);
@@ -22,23 +21,29 @@ public class FWAuto extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     
-    	
+    	Robot.drive.SRX1.set(0);
+    	Robot.drive.SRX2.set(0);
+    	Robot.drive.SRX3.set(0);
+    	Robot.drive.SRX4.set(0);
+    	Robot.drive.LB.set(0);
+    	Robot.drive.LF.set(0);
+    	Robot.drive.RB.set(0);
+    	Robot.drive.RF.set(0);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	
-    	Robot.drive.SRX1.set(0.5);
-    	Robot.drive.SRX2.set(0.5);
-    	Robot.drive.SRX3.set(0.5);
-    	Robot.drive.SRX4.set(0.5);
-    	Robot.drive.LB.set(0.5);
-    	Robot.drive.LF.set(0.5);
-    	Robot.drive.RB.set(0.5);
-    	Robot.drive.RF.set(0.5);
+    	Robot.drive.SRX1.set(0);
+    	Robot.drive.SRX2.set(0);
+    	Robot.drive.SRX3.set(0);
+    	Robot.drive.SRX4.set(0);
+    	Robot.drive.LB.set(0);
+    	Robot.drive.LF.set(0);
+    	Robot.drive.RB.set(0);
+    	Robot.drive.RF.set(0);
    
-    	Timer.delay(5);
-    	Stop.start();
+    	
     	
     	
     }

@@ -1,19 +1,17 @@
 
 package org.usfirst.frc.team5275.robot;
 
-import org.usfirst.frc.team5275.robot.commands.ExampleCommand;
 import org.usfirst.frc.team5275.robot.commands.MechDrive;
 import org.usfirst.frc.team5275.robot.commands.TankDrive;
 import org.usfirst.frc.team5275.robot.commands.*;
-import org.usfirst.frc.team5275.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team5275.robot.subsystems.*;
-import com.ctre.*;
 import edu.wpi.first.wpilibj.IterativeRobot;
 
 import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.command.*;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.livewindow.LiveWindowSendable;
 import edu.wpi.first.wpilibj.smartdashboard.*;
 
 /**
@@ -28,22 +26,32 @@ import edu.wpi.first.wpilibj.smartdashboard.*;
 public class Robot extends IterativeRobot {
 
 	public static OI oi;
-	
+	double slider;
     Command autonomousCommand;
     Command teleopCommand;
     Command DriveSystem;
+    Command DriveSYS;
     public Command Tank = new TankDrive();
     public Command MechDrive = new MechDrive();
+    public Command FWAuto = new FWAuto();
+    public Command BKAuto = new BKAuto();
+    public Command Stop = new Stop();
+    //public Command  = new ();
  //   public Command QSwitch = new QSwitch();
-    Command DriveSYS;
-    SendableChooser autocon;
+    
+    SendableChooser<Command> autocon;
     SendableChooser<Command> DRSYS;
     SendableChooser<Command> telecon;
     public static DriveTrain drive = new DriveTrain();
-    // public static RobotDrive PWMDrive = new RobotDrive(Robot.drive.LF,Robot.drive.LB,Robot.drive.RF,Robot.drive.RB);
+    public static RobotDrive PWMDrive = new RobotDrive(Robot.drive.LF,Robot.drive.LB,Robot.drive.RF,Robot.drive.RB);
     public static RobotDrive CANDrive = new RobotDrive(Robot.drive.SRX1,Robot.drive.SRX2,Robot.drive.SRX3,Robot.drive.SRX4);
-    
-    
+    LiveWindowSendable LFT;
+ /*   void SmartDashboard() {
+    	SendableChooser<Command> autocon;
+        SendableChooser<Command> DRSYS;
+        SendableChooser<Command> telecon;
+    };
+ */   
     Boolean i = false;
     
     /**
@@ -53,22 +61,29 @@ public class Robot extends IterativeRobot {
     
     public void robotInit() {
 		oi = new OI();
-        
+		CameraServer cServer = CameraServer.getInstance();
+		cServer.startAutomaticCapture("FrontCamera", 0);
 		//Not working choosers
+		
 		autocon = new SendableChooser<Command>();
         autocon.addDefault("Forward", new FWAuto());
         autocon.addObject("Backward", new BKAuto());
         //autocon.addObject("Other Auto (Don't Use)", new teleop());
-        SmartDashboard.putData("Auto mode", autocon);
+        SmartDashboard.putData("Auto Selector", autocon);
+        
         DRSYS = new SendableChooser<Command>();
         DRSYS.addDefault("Tank", new TankDrive());
         DRSYS.addObject("Mech", new MechDrive());
         SmartDashboard.putData("Drive system", DRSYS);
+        
         telecon = new SendableChooser<Command>();
         telecon.addDefault("Single Stick", new TankDrive());
         telecon.addObject("Twin Stick (Don't Use)", new MechDrive());
         SmartDashboard.putData("Control Mode", telecon);
         
+        boolean C = SmartDashboard.containsKey("Auto selector");
+        SmartDashboard.containsKey("Auto selector");
+        System.out.println(C);
         /*
 		CameraServer server = CameraServer.getInstance();
 		server.startAutomaticCapture(0);
@@ -91,7 +106,8 @@ public class Robot extends IterativeRobot {
         */
         
     }
-	
+
+
 	/*
      * This function is called once each time the robot enters Disabled mode.
      * You can use it to reset any subsystem information you want to clear when
@@ -118,7 +134,7 @@ public class Robot extends IterativeRobot {
     public void autonomousInit() {
     
     	
-    	autonomousCommand = (Command) autocon.getSelected();
+    //	autonomousCommand = (Command) autocon.getSelected();
         
 /*		String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
 		switch(autoSelected) {
@@ -132,8 +148,9 @@ public class Robot extends IterativeRobot {
 		} 
   */  	
     	// schedule the autonomous command (example)
-        if (autonomousCommand != null) autonomousCommand.start();
-        
+     //   if (autonomousCommand != null) 
+    //	autonomousCommand.start();
+       
  		
     	
     	
@@ -146,6 +163,40 @@ public class Robot extends IterativeRobot {
      */
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
+        
+        
+        /**
+         * Choosers for the default dashboard.
+         * Look in the Basic Tab
+         * 
+         * You can add information to the Dashboard by changing .get to .put
+         * and by putting a value into the spot after the key
+         * 
+         * The Following three lines show this.
+         **/
+        SmartDashboard.putString("DB/String 3", "Showing");
+        SmartDashboard.putNumber("DB/Slider 3", 2.5);
+        SmartDashboard.putBoolean("DB/Slider 3", true);
+        
+        
+        if (SmartDashboard.getNumber("DB/Slider 0", 0.0) == 1) {
+        	FWAuto.start();
+        } else	if (SmartDashboard.getNumber("DB/Slider 0", 0.0) == 2) {
+        	BKAuto.start();
+        } else {
+        	Stop.start();
+        };
+        
+        
+        
+        String Auto = SmartDashboard.getString("DB/String 0", "");
+        if (Auto.equalsIgnoreCase("Out")) {
+        System.out.println("It works");
+        } else {
+        	System.out.println(Auto);
+        };
+        
+        
     }
 
     public void teleopInit() {
@@ -155,9 +206,9 @@ public class Robot extends IterativeRobot {
         // this line or comment it out.
         
     	DriveSystem = (Command) DRSYS.getSelected();
-    	if (DriveSystem != null) DriveSystem.start();
+    	DriveSystem.start();
     	teleopCommand = (Command) telecon.getSelected();
-    	if (teleopCommand != null) teleopCommand.start();
+    	teleopCommand.start();
     	
         
   /*      
@@ -186,34 +237,62 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
     	
-        //Scheduler.getInstance().run();
+   //     Scheduler.getInstance().run();
      //   teleop.start();
         //Tank.start();
-    	//PWMDrive.tankDrive(-0.9*oi.leftS.getY(), -0.9*oi.rightS.getY());
-    	//CANDrive.tankdrive(-0.9*OI.le+ftS.getY(), -0.9*OI.rightS.getY());
-    	CANDrive.mecanumDrive_Cartesian(.5*oi.rightS.getX(), .5*oi.rightS.getY(), .5*oi.rightS.getZ(),0);
-    	//PWMDrive.mecanumDrive_Cartesian(.5*oi.rightS.getX(), .5*oi.rightS.getY(), .5*oi.rightS.getTwist(), 0);
-//    	Normal Drive Using PWM slots
+    	slider = oi.rightS.getRawAxis(3);
+    	slider = (slider + 1) / 2;
+    	 //TODO The above code needs to be tested. try printing the value of slider.
+    	 
+    	 String Drive = SmartDashboard.getString("DB/String 5", "");
+         if (Drive.equalsIgnoreCase("PWM Mech")) {
+        	 PWMDrive.mecanumDrive_Cartesian(slider*oi.rightS.getX(), slider*oi.rightS.getY(), slider*oi.rightS.getTwist(), 0);
+        	 // Mecanum Drive Using PWM slots
+         } else if (Drive.equalsIgnoreCase("CAN Mech")) {
+        	 CANDrive.mecanumDrive_Cartesian(slider*oi.rightS.getX(), slider*oi.rightS.getY(), slider*oi.rightS.getZ(),0);
+        	 // Mecanum Drive Using CAN Speed Controllers
+         } else if (Drive.equalsIgnoreCase("PWM Tank")) {
+        	 PWMDrive.tankDrive(slider*oi.leftS.getY(), slider*oi.rightS.getY());
+        	 // Tank Drive Using PWM slots
+         } else if (Drive.equalsIgnoreCase("CAN Tank")) {
+        	 CANDrive.tankDrive(slider*oi.leftS.getY(), slider*oi.rightS.getY()); 
+        	 // Tank Drive Using CAN Speed Controllers
+         };
     	
     	
-    	if (Robot.oi.BR8.get() == true){
-    		Robot.drive.V1.set(1);
-    	} else if (Robot.oi.BR12.get() == true){
-    		Robot.drive.V1.set(-0.4);
-    	} else if (Robot.oi.BR2.get() == true){
-    		Robot.drive.V1.set(-0.60);
-    	} else if (Robot.oi.BR1.get() == true){
-    		Robot.drive.V1.set(-0.80);
+    	
+    	
+    	if (Robot.oi.BL6.get() == true){
+    		Robot.drive.Out.set(-0.4);
+    	} else if (Robot.oi.BL7.get() == true){
+    		Robot.drive.Out.set(-0.5);
+    	} else if (Robot.oi.BL8.get() == true) {
+    		Robot.drive.Out.set(1);
     	} else {
-    		Robot.drive.V1.set(0.0);
+    		Robot.drive.Out.set(0.0);
+    	}
+    	
+    	// Double i = 1; 
+    	if (Robot.oi.BL4.get() == true) {
+    		Robot.drive.Winch.set(-0.5);
+    	} else if(Robot.oi.BL2.get() == true) {
+    			Robot.drive.Winch.set(-1);
+    	} else if(Robot.oi.BL5.get() == true) {
+			Robot.drive.Winch.set(0.5);
+    	} else if(Robot.oi.BL3.get() == true) {
+			Robot.drive.Winch.set(1);
+    	} else {
+    		Robot.drive.Winch.set(0.0);
     	}
     		
    	
-    	if (Robot.oi.BR7.get() == true){
-    		Robot.drive.Sweep.set(0.4);
-    	} else if (Robot.oi.BR11.get() == true){
+    	if (Robot.oi.BL11.get() == true){
+    		Robot.drive.Sweep.set(0.5);
+    	} else if (Robot.oi.BL10.get() == true){
     		Robot.drive.Sweep.set(-0.45);
-    	} 	else {
+    	} else if (Robot.oi.BL9.get() == true) {
+    		Robot.drive.Sweep.set(1);
+    	} else {
     		Robot.drive.Sweep.set(0.0);
     	}			
    

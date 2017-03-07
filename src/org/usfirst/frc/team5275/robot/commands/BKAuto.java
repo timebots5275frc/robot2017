@@ -2,7 +2,7 @@ package org.usfirst.frc.team5275.robot.commands;
 
 import org.usfirst.frc.team5275.robot.*;
 
-import edu.wpi.first.wpilibj.Timer;
+//import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -19,14 +19,6 @@ public class BKAuto extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     
-    	Robot.drive.SRX1.set(0);
-    	Robot.drive.SRX2.set(0);
-    	Robot.drive.SRX3.set(0);
-    	Robot.drive.SRX4.set(0);
-    	Robot.drive.LB.set(0);
-    	Robot.drive.LF.set(0);
-    	Robot.drive.RB.set(0);
-    	Robot.drive.RF.set(0);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -40,6 +32,8 @@ public class BKAuto extends Command {
     	Robot.drive.LF.set(-0.5);
     	Robot.drive.RB.set(-0.5);
     	Robot.drive.RF.set(-0.5);
+    	
+    /*	
     	try {
 			Thread.sleep(10000);
 		} catch (InterruptedException e) {
@@ -56,7 +50,7 @@ public class BKAuto extends Command {
     	Robot.drive.RB.set(0);
     	Robot.drive.RF.set(0);
     	
-    	
+   */ 	
     }
 
     // Make this return true when this Command no longer needs to run execute()

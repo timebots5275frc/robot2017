@@ -24,7 +24,7 @@ public class TankDrive extends Command {
     protected void execute() {
     	double l = Robot.oi.leftS.getY();
     	double r = Robot.oi.rightS.getY();
-    //	Robot.PWMDrive.tankDrive(l, r);
+    	Robot.PWMDrive.tankDrive(l, r);
     }
 
     // Make this return true when this Command no longer needs to run execute()
