@@ -1,6 +1,7 @@
 package org.usfirst.frc.team5275.robot.subsystems;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.Victor;
+import edu.wpi.first.wpilibj.Spark;
 import com.ctre.CANTalon;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -12,7 +13,7 @@ public class DriveTrain extends Subsystem {
     public Talon RF = new Talon(3);
     public Talon LB = new Talon(2);
     public Talon RB = new Talon(4);
-    public Talon Sweep = new Talon(8);
+    public Spark  Sweep = new Spark(8);
     public CANTalon SRX1 = new CANTalon(1);
     public CANTalon SRX2 = new CANTalon(2);
     public CANTalon SRX3 = new CANTalon(3);

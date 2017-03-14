@@ -36,6 +36,7 @@ public class Robot extends IterativeRobot {
     public Command FWAuto = new FWAuto();
     public Command BKAuto = new BKAuto();
     public Command Stop = new Stop();
+    public Timer Time = new Timer();
     //public Command  = new ();
  //   public Command QSwitch = new QSwitch();
     
@@ -62,7 +63,7 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
 		oi = new OI();
 		CameraServer cServer = CameraServer.getInstance();
-		cServer.startAutomaticCapture("FrontCamera", 0);
+		//cServer.startAutomaticCapture("FrontCamera", 0);
 		//Not working choosers
 		
 		autocon = new SendableChooser<Command>();
@@ -176,18 +177,35 @@ public class Robot extends IterativeRobot {
          **/
         SmartDashboard.putString("DB/String 3", "Showing");
         SmartDashboard.putNumber("DB/Slider 3", 2.5);
-        SmartDashboard.putBoolean("DB/Slider 3", true);
+        SmartDashboard.putBoolean("DB/Button 3", true);
+        
+        
+        if (SmartDashboard.getBoolean("DB/Slider 3", false) == true) {
+        	System.out.println("Slider 3 is true");
+        }
+        
+        
         
         
         if (SmartDashboard.getNumber("DB/Slider 0", 0.0) == 1) {
         	FWAuto.start();
+        	boolean v1 = true;
+        	if (v1 == true) {
+        		System.out.println("Forward March");
+        	v1 = false;
+        	}
+        		
         } else	if (SmartDashboard.getNumber("DB/Slider 0", 0.0) == 2) {
         	BKAuto.start();
+        	boolean v1 = true;
+        	if (v1 == true) {
+        		System.out.println("Retreat");
+        	v1 = false;
+        	}
         } else {
         	Stop.start();
         };
-        
-        
+         
         
         String Auto = SmartDashboard.getString("DB/String 0", "");
         if (Auto.equalsIgnoreCase("Out")) {
@@ -211,7 +229,7 @@ public class Robot extends IterativeRobot {
     	teleopCommand.start();
     	
         
-  /*      
+  /*    
         Robot.drive.SRX1.enable();
         Robot.drive.SRX2.enable();
         Robot.drive.SRX3.enable();
@@ -241,29 +259,34 @@ public class Robot extends IterativeRobot {
      //   teleop.start();
         //Tank.start();
     	slider = oi.rightS.getRawAxis(3);
-    	slider = (slider + 1) / 2;
-    	 //TODO The above code needs to be tested. try printing the value of slider.
+    	slider = -(slider - 1) / 2;
+    	//TODO The above code needs to be tested. try printing the value of slider.
     	 
     	 String Drive = SmartDashboard.getString("DB/String 5", "");
+    	 System.out.println(slider);
          if (Drive.equalsIgnoreCase("PWM Mech")) {
-        	 PWMDrive.mecanumDrive_Cartesian(slider*oi.rightS.getX(), slider*oi.rightS.getY(), slider*oi.rightS.getTwist(), 0);
+    	 PWMDrive.mecanumDrive_Cartesian(slider*oi.rightS.getX(), slider*oi.rightS.getY(), slider*oi.rightS.getTwist(), 0);
         	 // Mecanum Drive Using PWM slots
-         } else if (Drive.equalsIgnoreCase("CAN Mech")) {
+    	 	System.out.println("PWM Mech Drive");
+         } else { //(Drive.equalsIgnoreCase("CAN Mech"))
         	 CANDrive.mecanumDrive_Cartesian(slider*oi.rightS.getX(), slider*oi.rightS.getY(), slider*oi.rightS.getZ(),0);
         	 // Mecanum Drive Using CAN Speed Controllers
-         } else if (Drive.equalsIgnoreCase("PWM Tank")) {
+        	 System.out.println("PWM CAN Drive");
+         } 
+         
+         /*else if (Drive.equalsIgnoreCase("PWM Tank")) {
         	 PWMDrive.tankDrive(slider*oi.leftS.getY(), slider*oi.rightS.getY());
         	 // Tank Drive Using PWM slots
          } else if (Drive.equalsIgnoreCase("CAN Tank")) {
         	 CANDrive.tankDrive(slider*oi.leftS.getY(), slider*oi.rightS.getY()); 
         	 // Tank Drive Using CAN Speed Controllers
-         };
+         };*/
     	
     	
     	
     	
     	if (Robot.oi.BL6.get() == true){
-    		Robot.drive.Out.set(-0.4);
+    		Robot.drive.Out.set(0.4);
     	} else if (Robot.oi.BL7.get() == true){
     		Robot.drive.Out.set(-0.5);
     	} else if (Robot.oi.BL8.get() == true) {
@@ -287,9 +310,9 @@ public class Robot extends IterativeRobot {
     		
    	
     	if (Robot.oi.BL11.get() == true){
-    		Robot.drive.Sweep.set(0.5);
-    	} else if (Robot.oi.BL10.get() == true){
     		Robot.drive.Sweep.set(-0.45);
+    	} else if (Robot.oi.BL10.get() == true){
+    		Robot.drive.Sweep.set(0.5);
     	} else if (Robot.oi.BL9.get() == true) {
     		Robot.drive.Sweep.set(1);
     	} else {
