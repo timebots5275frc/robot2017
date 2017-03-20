@@ -28,7 +28,8 @@ public class BKAuto extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	
+    	boolean v2 = true;
+    	boolean v3 = true;
     	double CTime = Time.get();
 	    Time.get();
 	    System.out.print(CTime);
@@ -42,8 +43,8 @@ public class BKAuto extends Command {
 	    	Robot.drive.LF.set(-0.55);
 	    	Robot.drive.RB.set(-0.5);
 	    	Robot.drive.RF.set(-0.5);
-	    	boolean v2 = true;
-	    	if (v2 = true) {
+	    	
+	    	if (v2 == true) {
 	    	System.out.print(CTime);
 	    	v2 = false;
 	    	}
@@ -59,8 +60,8 @@ public class BKAuto extends Command {
         	Robot.drive.RB.set(0);
         	Robot.drive.RF.set(0);
     		Time.stop();
-    		boolean v3 = true;
-	    	if (v3 = true) {
+    		
+	    	if (v3 == true) {
 	    	System.out.print(CTime);
 	    	v3 = false;
 	    	}	

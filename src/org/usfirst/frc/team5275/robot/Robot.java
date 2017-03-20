@@ -33,7 +33,7 @@ public class Robot extends IterativeRobot {
     Command DriveSYS;
     public Command Tank = new TankDrive();
     public Command MechDrive = new MechDrive();
-    public Command FWAuto = new FWAuto();
+    public Command Middle = new MiddleGear();
     public Command BKAuto = new BKAuto();
     public Command Stop = new Stop();
     public Timer Time = new Timer();
@@ -62,12 +62,12 @@ public class Robot extends IterativeRobot {
     
     public void robotInit() {
 		oi = new OI();
-		CameraServer cServer = CameraServer.getInstance();
+//		CameraServer cServer = CameraServer.getInstance();
 		//cServer.startAutomaticCapture("FrontCamera", 0);
 		//Not working choosers
 		
 		autocon = new SendableChooser<Command>();
-        autocon.addDefault("Forward", new FWAuto());
+        autocon.addDefault("Middle", new MiddleGear());
         autocon.addObject("Backward", new BKAuto());
         //autocon.addObject("Other Auto (Don't Use)", new teleop());
         SmartDashboard.putData("Auto Selector", autocon);
@@ -184,23 +184,29 @@ public class Robot extends IterativeRobot {
         	System.out.println("Slider 3 is true");
         }
         
-        
-        
-        
         if (SmartDashboard.getNumber("DB/Slider 0", 0.0) == 1) {
-        	FWAuto.start();
+        	//Left.start();
         	boolean v1 = true;
         	if (v1 == true) {
-        		System.out.println("Forward March");
+        		System.out.println("Left Side");
         	v1 = false;
         	}
+        }
+        
+        if (SmartDashboard.getNumber("DB/Slider 0", 0.0) == 2) {
+        	Middle.start();
+        	boolean v2 = true;
+        	if (v2 == true) {
+        		System.out.println("Middle Slot");
+        	v2 = false;
+        	}
         		
-        } else	if (SmartDashboard.getNumber("DB/Slider 0", 0.0) == 2) {
+        } else	if (SmartDashboard.getNumber("DB/Slider 0", 0.0) == 3) {
         	BKAuto.start();
-        	boolean v1 = true;
-        	if (v1 == true) {
-        		System.out.println("Retreat");
-        	v1 = false;
+        	boolean v3 = true;
+        	if (v3 == true) {
+        		System.out.println("Right Side");
+        	v3 = false;
         	}
         } else {
         	Stop.start();

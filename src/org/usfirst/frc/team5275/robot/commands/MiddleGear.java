@@ -1,21 +1,21 @@
 package org.usfirst.frc.team5275.robot.commands;
 
 import org.usfirst.frc.team5275.robot.Robot;
-import org.usfirst.frc.team5275.robot.commands.*;
+//import org.usfirst.frc.team5275.robot.commands.*;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class FWAuto extends Command {
+public class MiddleGear extends Command {
 
-	Command F25 = new Forward25();
-	Command Stop = new Stop();
+//	Command F25 = new Forward25();
+//	Command Stop = new Stop();
 	
 	Timer Time = new Timer();
 	
-    public FWAuto() {
+    public MiddleGear() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.drive);
@@ -34,35 +34,25 @@ public class FWAuto extends Command {
     	double CTime = Time.get();
 	    Time.get();
 	    System.out.print(CTime);
+	    boolean v2 = true;
+	    boolean v3 = true;
 	    if (Time.get() < 2.0){
 	    	
-	    	Robot.drive.SRX1.set(0.25);
-	    	Robot.drive.SRX2.set(0.25);
-	    	Robot.drive.SRX3.set(0.25);
-	    	Robot.drive.SRX4.set(0.25);
-	    	Robot.drive.LB.set(0.25);
-	    	Robot.drive.LF.set(0.25);
-	    	Robot.drive.RB.set(0.25);
-	    	Robot.drive.RF.set(0.25);
-	    	boolean v2 = true;
-	    	if (v2 = true) {
+	    	Robot.PWMDrive.mecanumDrive_Cartesian(0.0, -0.5, 0, 0);
+	    	Robot.CANDrive.mecanumDrive_Cartesian(0.0, -0.5, 0, 0);
+	    	
+	    	if (v2 == true) {
 	    	System.out.print(CTime);
 	    	v2 = false;
 	    	}
 	    }
 	    	
     	if (Time.get() > 2) {
-    		Robot.drive.SRX1.set(0);
-        	Robot.drive.SRX2.set(0);
-        	Robot.drive.SRX3.set(0);
-        	Robot.drive.SRX4.set(0);
-        	Robot.drive.LB.set(0);
-        	Robot.drive.LF.set(0);
-        	Robot.drive.RB.set(0);
-        	Robot.drive.RF.set(0);
+    		Robot.PWMDrive.mecanumDrive_Cartesian(0.0, 0.0, 0, 0);
+	    	Robot.CANDrive.mecanumDrive_Cartesian(0.0, 0.0, 0, 0);
     		Time.stop();
-    		boolean v3 = true;
-	    	if (v3 = true) {
+    	
+	    	if (v3 == true) {
 	    	System.out.print(CTime);
 	    	v3 = false;
 	    	}	
