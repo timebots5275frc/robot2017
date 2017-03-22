@@ -32,14 +32,14 @@ public class MiddleGear extends Command {
     protected void execute() {
     	
     	double CTime = Time.get();
-	    Time.get();
+	    //Time.get(); Shouldn't be necessary
 	    System.out.print(CTime);
 	    boolean v2 = true;
 	    boolean v3 = true;
 	    if (Time.get() < 2.0){
 	    	
-	    	Robot.PWMDrive.mecanumDrive_Cartesian(0.0, -0.5, 0, 0);
-	    	Robot.CANDrive.mecanumDrive_Cartesian(0.0, -0.5, 0, 0);
+	    	Robot.PWMDrive.mecanumDrive_Cartesian(0.0, 0.5, 0, 0);
+	    	Robot.CANDrive.mecanumDrive_Cartesian(0.0, 0.5, 0, 0);
 	    	
 	    	if (v2 == true) {
 	    	System.out.print(CTime);
