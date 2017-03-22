@@ -1,18 +1,22 @@
 
 package org.usfirst.frc.team5275.robot;
 
+import org.usfirst.frc.team5275.robot.commands.BKAuto;
 import org.usfirst.frc.team5275.robot.commands.MechDrive;
+import org.usfirst.frc.team5275.robot.commands.MiddleGear;
+import org.usfirst.frc.team5275.robot.commands.Stop;
 import org.usfirst.frc.team5275.robot.commands.TankDrive;
-import org.usfirst.frc.team5275.robot.commands.*;
-import org.usfirst.frc.team5275.robot.subsystems.*;
-import edu.wpi.first.wpilibj.IterativeRobot;
+import org.usfirst.frc.team5275.robot.subsystems.DriveTrain;
 
-import edu.wpi.first.wpilibj.*;
+import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.RobotDrive;
+import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.first.wpilibj.command.*;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.livewindow.LiveWindowSendable;
-import edu.wpi.first.wpilibj.smartdashboard.*;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * 
