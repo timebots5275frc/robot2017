@@ -1,14 +1,15 @@
-
 package org.usfirst.frc.team5275.robot;
 
+
+import org.usfirst.frc.team5275.robot.OI;
 import org.usfirst.frc.team5275.robot.commands.BKAuto;
+import org.usfirst.frc.team5275.robot.commands.LeftGear;
 import org.usfirst.frc.team5275.robot.commands.MechDrive;
 import org.usfirst.frc.team5275.robot.commands.MiddleGear;
 import org.usfirst.frc.team5275.robot.commands.RightGear;
 import org.usfirst.frc.team5275.robot.commands.Stop;
 import org.usfirst.frc.team5275.robot.commands.TankDrive;
 import org.usfirst.frc.team5275.robot.subsystems.DriveTrain;
-
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Timer;
@@ -27,6 +28,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * documentation. If you change the name of this class or the package after
  * creating this project, you must also update the manifest file in the resource
  * directory.
+ * 
+ * 
+ * 
  */
 public class Robot extends IterativeRobot {
 
@@ -75,7 +79,8 @@ public class Robot extends IterativeRobot {
 		
 		autocon = new SendableChooser<Command>();
         autocon.addDefault("Middle", new MiddleGear());
-        autocon.addObject("Right", new RightGear());
+        autocon.addObject("Right Gear", new RightGear());
+        autocon.addObject("Left Gear", new LeftGear());
         autocon.addObject("Backward", new BKAuto());
         SmartDashboard.putData("Auto Selector", autocon);
         
