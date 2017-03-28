@@ -4,6 +4,7 @@ package org.usfirst.frc.team5275.robot;
 import org.usfirst.frc.team5275.robot.commands.BKAuto;
 import org.usfirst.frc.team5275.robot.commands.MechDrive;
 import org.usfirst.frc.team5275.robot.commands.MiddleGear;
+import org.usfirst.frc.team5275.robot.commands.RightGear;
 import org.usfirst.frc.team5275.robot.commands.Stop;
 import org.usfirst.frc.team5275.robot.commands.TankDrive;
 import org.usfirst.frc.team5275.robot.subsystems.DriveTrain;
@@ -31,6 +32,7 @@ public class Robot extends IterativeRobot {
 
 	public static OI oi;
 	double slider;
+	Command tempCommand;
     Command autonomousCommand;
     Command teleopCommand;
     Command DriveSystem;
@@ -38,6 +40,7 @@ public class Robot extends IterativeRobot {
     public Command Tank = new TankDrive();
     public Command MechDrive = new MechDrive();
     public Command Middle = new MiddleGear();
+    public Command Right = new RightGear();
     public Command BKAuto = new BKAuto();
     public Command Stop = new Stop();
     public Timer Time = new Timer();
@@ -72,8 +75,8 @@ public class Robot extends IterativeRobot {
 		
 		autocon = new SendableChooser<Command>();
         autocon.addDefault("Middle", new MiddleGear());
+        autocon.addObject("Right", new RightGear());
         autocon.addObject("Backward", new BKAuto());
-        //autocon.addObject("Other Auto (Don't Use)", new teleop());
         SmartDashboard.putData("Auto Selector", autocon);
         
         DRSYS = new SendableChooser<Command>();
@@ -184,7 +187,7 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putBoolean("DB/Button 3", true);
         
         
-        if (SmartDashboard.getBoolean("DB/Slider 3", false) == true) {
+        /*if (SmartDashboard.getBoolean("DB/Slider 3", false) == true) {
         	System.out.println("Slider 3 is true");
         }
         
@@ -223,7 +226,9 @@ public class Robot extends IterativeRobot {
         } else {
         	System.out.println(Auto);
         };
-        
+        */
+        tempCommand = autocon.getSelected();
+        tempCommand.start();
         
     }
 
