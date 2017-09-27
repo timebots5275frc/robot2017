@@ -97,27 +97,7 @@ public class Robot extends IterativeRobot {
         boolean C = SmartDashboard.containsKey("Auto selector");
         SmartDashboard.containsKey("Auto selector");
         System.out.println(C);
-        /*
-		CameraServer server = CameraServer.getInstance();
-		server.startAutomaticCapture(0);
-         */
-        
-        /*
-        Robot.drive.SRX1.enable();
-        Robot.drive.SRX2.enable();
-        Robot.drive.SRX3.enable();
-        Robot.drive.SRX4.enable();
-        
-    	//Robot.drive.SRX1.
-    	//Robot.drive.SRX1.
-        
-        Robot.drive.SRX1.changeControlMode(TalonControlMode.PercentVbus);
-        Robot.drive.SRX2.changeControlMode(TalonControlMode.PercentVbus);
-        Robot.drive.SRX3.changeControlMode(TalonControlMode.PercentVbus);
-        Robot.drive.SRX4.changeControlMode(TalonControlMode.PercentVbus);
-    	
-        */
-        
+
     }
 
 
@@ -145,29 +125,7 @@ public class Robot extends IterativeRobot {
 	 * or additional comparisons to the switch structure below with additional strings & commands.
 	 */
     public void autonomousInit() {
-    
-    	
-    //	autonomousCommand = (Command) autocon.getSelected();
-        
-/*		String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
-		switch(autoSelected) {
-		case "My Auto":
-			autonomousCommand = new FWAuto();
-			break;
-		case "Default Auto":
-		default:
-			autonomousCommand = new FWAuto();
-			break;
-		} 
-  */  	
-    	// schedule the autonomous command (example)
-     //   if (autonomousCommand != null) 
-    //	autonomousCommand.start();
-       
- 		
-    	
-    	
-    	
+
     	
 }
 
@@ -191,47 +149,6 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putNumber("DB/Slider 3", 2.5);
         SmartDashboard.putBoolean("DB/Button 3", true);
         
-        
-        /*if (SmartDashboard.getBoolean("DB/Slider 3", false) == true) {
-        	System.out.println("Slider 3 is true");
-        }
-        
-        if (SmartDashboard.getNumber("DB/Slider 0", 0.0) == 1) {
-        	//Left.start();
-        	boolean v1 = true;
-        	if (v1 == true) {
-        		System.out.println("Left Side");
-        	v1 = false;
-        	}
-        }
-        
-        if (SmartDashboard.getNumber("DB/Slider 0", 0.0) == 2) {
-        	Middle.start();
-        	boolean v2 = true;
-        	if (v2 == true) {
-        		System.out.println("Middle Slot");
-        	v2 = false;
-        	}
-        		
-        } else	if (SmartDashboard.getNumber("DB/Slider 0", 0.0) == 3) {
-        	BKAuto.start();
-        	boolean v3 = true;
-        	if (v3 == true) {
-        		System.out.println("Right Side");
-        	v3 = false;
-        	}
-        } else {
-        	Stop.start();
-        };
-         
-        
-        String Auto = SmartDashboard.getString("DB/String 0", "");
-        if (Auto.equalsIgnoreCase("Out")) {
-        System.out.println("It works");
-        } else {
-        	System.out.println(Auto);
-        };
-        */
         tempCommand = autocon.getSelected();
         tempCommand.start();
         
@@ -247,23 +164,6 @@ public class Robot extends IterativeRobot {
     	DriveSystem.start();
     	teleopCommand = (Command) telecon.getSelected();
     	teleopCommand.start();
-    	
-        
-  /*    
-        Robot.drive.SRX1.enable();
-        Robot.drive.SRX2.enable();
-        Robot.drive.SRX3.enable();
-        Robot.drive.SRX4.enable();
-    	
-        //Robot.drive.SRX1.
-    	//Robot.drive.SRX1.
-        
-        Robot.drive.SRX1.getControlMode();
-        Robot.drive.SRX2.getControlMode();
-        Robot.drive.SRX3.getControlMode();
-        Robot.drive.SRX4.getControlMode();
-       
-   */     
         System.out.println("robot started");
         
     }
@@ -275,9 +175,7 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
     	
-   //     Scheduler.getInstance().run();
-     //   teleop.start();
-        //Tank.start();
+
     	slider = oi.rightS.getRawAxis(3);
     	slider = -(slider - 1) / 2;
     	//TODO The above code needs to be tested. try printing the value of slider.
@@ -294,13 +192,7 @@ public class Robot extends IterativeRobot {
         	 System.out.println("PWM CAN Drive");
          } 
          
-         /*else if (Drive.equalsIgnoreCase("PWM Tank")) {
-        	 PWMDrive.tankDrive(slider*oi.leftS.getY(), slider*oi.rightS.getY());
-        	 // Tank Drive Using PWM slots
-         } else if (Drive.equalsIgnoreCase("CAN Tank")) {
-        	 CANDrive.tankDrive(slider*oi.leftS.getY(), slider*oi.rightS.getY()); 
-        	 // Tank Drive Using CAN Speed Controllers
-         };*/
+
     	
     	
     	
@@ -341,31 +233,7 @@ public class Robot extends IterativeRobot {
    
     	
  	
-    	//OI.triggerR.whenActive(QSwitch);
-    	
-    	
-    //	Robot.drive.Con.set(0.5*oi.leftS.getY());
-    	
-/*    	
-    	double s1 = Robot.drive.SRX1.getSpeed();
-    	double s2 = Robot.drive.SRX2.getSpeed();
-    	double s3 = Robot.drive.SRX3.getSpeed();
-    	double s4 = Robot.drive.SRX4.getSpeed();
-    	//Robot.drive.SRX1.get
-    	
-    	System.out.print(s1);
-    	System.out.print(s2);
-    	System.out.print(s3);
-    	System.out.print(s4);
-  */  	
-    	
-   // 	Robot.drive.Test.
-   /* 	Robot.drive.SRX1.get();
-    	Robot.drive.SRX2.get();
-    	Robot.drive.SRX3.get();
-    	Robot.drive.SRX4.get();
-    	Robot.drive.SRX1.set(OI.rightS.getY());
-*/
+
     	
     	
     }
